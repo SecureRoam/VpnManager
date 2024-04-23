@@ -1,0 +1,30 @@
+ç.segmented-control {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+}
+
+.segment {
+  flex: 1;
+  height: 100%;
+  line-height: 50px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.segment:hover {
+  background-color: #eee;
+}
+
+.segment.selected {
+  background-color: #4caf50;
+  color: #fff;
+}
+

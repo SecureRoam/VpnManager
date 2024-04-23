@@ -1,0 +1,45 @@
+.openvpn-form {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.openvpn-form-group {
+  margin-bottom: 20px;
+}
+
+.openvpn-form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.openvpn-form-group input[type='text'],
+.openvpn-form-group input[type='number'],
+.openvpn-form-group textarea {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.openvpn-form-group input[type='checkbox'] {
+  margin-top: 5px;
+}
+
+.openvpn-form-group input[type='file'] {
+  margin-top: 5px;
+}
+
+.openvpn-form-group button {
+  width: 100%;
+  padding: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.openvpn-form-group button:hover {
+  background-color: #0056b3;
+}

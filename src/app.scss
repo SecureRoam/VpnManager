@@ -1,0 +1,40 @@
+// Import a modern font
+//@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+// Set the font for the entire project
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+// Layout
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.layout-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  background-color: #f5f5f5;
+}
+
+.layout-header-segmented-control {
+  margin-left: 10px;
+}
+
+.layout-body {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+}
+
+.layout-body-left {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.layout-body-right {
+  flex: 1;
+}
