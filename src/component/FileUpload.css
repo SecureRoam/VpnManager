@@ -1,4 +1,9 @@
 .file-upload {
   width: 300px;
   margin: 20px auto;
+  padding: 20px;
+  border: 2px dashed #007bff; /* Changement de style de bordure en pointillé en bleu */
+  border-radius: 5px;
+  text-align: center; /* Centrage du contenu */
+  color: #007bff; /* Changement de couleur du texte en bleu */
 }

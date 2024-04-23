@@ -16,7 +16,7 @@ const SegmentedControl = () => {
         className={`segment ${selectedIndex === 0 ? 'selected' : ''}`}
         onClick={() => handleSegmentClick(0)}
       >
-        NoEN
+        NoNe
       </button>
       <button
         className={`segment ${selectedIndex === 1 ? 'selected' : ''}`}

@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
-import Cockpit from 'cockpit';
+import {
+  Checkbox,
+  FormGroup,
+  TextArea,
+  TextInput,
+  Button,
+} from '@patternfly/react-core';
 import './OpenVpnForm.css';
+import Cockpit from 'cockpit';
 
 function OpenVpnForm() {
   // Add state variables for form inputs
@@ -9,11 +16,11 @@ function OpenVpnForm() {
   const [authUserPass, setAuthUserPass] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [ca, setCa] = useState('');
-  const [cert, setCert] = useState('');
-  const [key, setKey] = useState('');
-  const [tlsAuth, setTlsAuth] = useState(false);
-  const [tlsCrypt, setTlsCrypt] = useState(false);
+  const [caFile, setCaFile] = useState(''); 
+  const [certFile, setCertFile] = useState(''); 
+  const [keyFile, setKeyFile] = useState(''); 
+  const [tlsAuthFile, setTlsAuthFile] = useState(false); 
+  const [tlsCryptFile, setTlsCryptFile] = useState(false); 
   const [tlsVersionMin, setTlsVersionMin] = useState('TLSv1.2');
   const [cipher, setCipher] = useState('AES-256-CBC');
   const [hmac, setHmac] = useState('SHA256');
@@ -44,20 +51,20 @@ function OpenVpnForm() {
       case 'password':
         setPassword(value);
         break;
-      case 'ca':
-        setCa(value);
+        case 'caFile': 
+        setCaFile(value);
         break;
-      case 'cert':
-        setCert(value);
+      case 'certFile': 
+        setCertFile(value);
         break;
-      case 'key':
-        setKey(value);
+      case 'keyFile': 
+        setKeyFile(value);
         break;
-      case 'tlsAuth':
-        setTlsAuth(event.target.checked);
+      case 'tlsAuthFile': 
+        setTlsAuthFile(event.target.checked);
         break;
-      case 'tlsCrypt':
-        setTlsCrypt(event.target.checked);
+      case 'tlsCryptFile': 
+        setTlsCryptFile(event.target.checked);
         break;
       case 'tlsVersionMin':
         setTlsVersionMin(value);
@@ -96,46 +103,46 @@ function OpenVpnForm() {
 
   const handleSave = () => {
     const config = `
-client
-${clientConfig}
-remote
-${remoteConfig}
-auth-user-pass
-${authUserPass ? `${username} ${password}` : ''}
-<ca>
-${ca}
-</ca>
-<cert>
-${cert}
-</cert>
-<key>
-${key}
-</key>
-tls-auth
-${tlsAuth ? 'ta.key 1' : ''}
-tls-crypt
-${tlsCrypt ? 'tls-crypt v2' : ''}
-tls-version-min
-${tlsVersionMin}
-cipher
-${cipher}
-hmac
-${hmac}
-auth
-${auth}
-rsa
-${rsa}
-dh
-${dh}
-ncp-ciphers
-${ncpCiphers}
-ncp-enabled
-${ncpEnabled ? 'yes' : 'no'}
-tls-cipher
-${tlsCipher}
-tls-crypt-v2
-${tlsCryptV2 ? 'yes' : 'no'}
-`;
+    client
+    ${clientConfig}
+    remote
+    ${remoteConfig}
+    auth-user-pass
+    ${authUserPass ? `${username} ${password}` : ''}
+    <ca>
+    ${caFile}
+    </ca>
+    <cert>
+    ${certFile}
+    </cert>
+    <key>
+    ${keyFile}
+    </key>
+    tls-auth
+    ${tlsAuthFile ? 'ta.key 1' : ''}
+    tls-crypt
+    ${tlsCryptFile ? 'tls-crypt v2' : ''}
+    tls-version-min
+    ${tlsVersionMin}
+    cipher
+    ${cipher}
+    hmac
+    ${hmac}
+    auth
+    ${auth}
+    rsa
+    ${rsa}
+    dh
+    ${dh}
+    ncp-ciphers
+    ${ncpCiphers}
+    ncp-enabled
+    ${ncpEnabled ? 'yes' : 'no'}
+    tls-cipher
+    ${tlsCipher}
+    tls-crypt-v2
+    ${tlsCryptV2 ? 'yes' : 'no'}
+    `;
 
     const filePath = '/etc/openvpn/client.ovpn';
 
@@ -151,12 +158,14 @@ ${tlsCryptV2 ? 'yes' : 'no'}
       });
   };
 
+
   return (
-    <div>
-      <h2>OpenVPN Configuration</h2>
+    <div className="openvpn-form">
       <div>
-        <label htmlFor="clientConfig">Client Configuration:</label>
-        <textarea
+    <h2>OpenVPN Configuration</h2>
+    <div className="openvpn-form-group">
+      <FormGroup label="Client Configuration:" fieldId="clientConfig">
+        <TextArea
           id="clientConfig"
           name="clientConfig"
           value={clientConfig}
@@ -164,10 +173,9 @@ ${tlsCryptV2 ? 'yes' : 'no'}
           rows={10}
           cols={50}
         />
-      </div>
-      <div>
-        <label htmlFor="remoteConfig">Remote Configuration:</label>
-        <textarea
+      </FormGroup>
+      <FormGroup label="Remote Configuration:" fieldId="remoteConfig">
+        <TextArea
           id="remoteConfig"
           name="remoteConfig"
           value={remoteConfig}
@@ -175,193 +183,198 @@ ${tlsCryptV2 ? 'yes' : 'no'}
           rows={10}
           cols={50}
         />
-      </div>
-      <div>
-        <label htmlFor="authUserPass">Use Auth User/Pass:</label>
-        <input
-          type="checkbox"
+      </FormGroup>
+      <FormGroup label="" fieldId="authUserPass">
+        <Checkbox
           id="authUserPass"
-          name="authUserPass"
-          checked={authUserPass}
-          onChange={handleInputChange}
+          isChecked={authUserPass}
+          onChange={event => setAuthUserPass(event.target.checked)}
+          label="Use Auth User/Pass"
         />
-      </div>
+      </FormGroup>
       {authUserPass && (
         <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={handleInputChange}
-          />
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handleInputChange}
-          />
+          <FormGroup label="Username:" fieldId="username">
+            <TextInput
+              type="text"
+              id="username"
+              name="username"
+              value={username}
+              onChange={handleInputChange}
+            />
+          </FormGroup>
+          <FormGroup label="Password:" fieldId="password">
+            <TextInput
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={handleInputChange}
+            />
+          </FormGroup>
         </div>
       )}
-      <div>
-        <label htmlFor="ca">CA Cert:</label>
-        <textarea
-          id="ca"
-          name="ca"
-          value={ca}
+      <FormGroup label="CA Cert:" fieldId="caFile">
+        <TextArea
+          id="caFile"
+          name="caFile"
+          value={caFile}
           onChange={handleInputChange}
           rows={10}
           cols={50}
         />
+      </FormGroup>
+      <div>
+        <FormGroup label="Cert:" fieldId="certFile">
+          <TextArea
+            id="certFile"
+            name="certFile"
+            value={certFile}
+            onChange={handleInputChange}
+            rows={10}
+            cols={50}
+          />
+        </FormGroup>
       </div>
       <div>
-        <label htmlFor="cert">Cert:</label>
-        <textarea
-          id="cert"
-          name="cert"
-          value={cert}
-          onChange={handleInputChange}
-          rows={10}
-          cols={50}
+        <FormGroup label="Key:" fieldId="keyFile">
+          <TextArea
+            id="keyFile"
+            name="keyFile"
+            value={keyFile}
+            onChange={handleInputChange}
+            rows={10}
+            cols={50}
+          />
+        </FormGroup>
+      </div>
+      <FormGroup label="" fieldId="tlsAuthFile">
+        <Checkbox
+          id="tlsAuthFile"
+          isChecked={tlsAuthFile}
+          onChange={event => setTlsAuthFile(event.target.checked)}
+          label="Use TLS Auth"
         />
-      </div>
-      <div>
-        <label htmlFor="key">Key:</label>
-        <textarea
-          id="key"
-          name="key"
-          value={key}
-          onChange={handleInputChange}
-          rows={10}
-          cols={50}
+      </FormGroup>
+      <FormGroup label="" fieldId="tlsCryptFile">
+        <Checkbox
+          id="tlsCryptFile"
+          isChecked={tlsCryptFile}
+          onChange={event => setTlsCryptFile(event.target.checked)}
+          label="Use TLS Crypt"
         />
+      </FormGroup>
+      <div>
+        <FormGroup label="TLS Version Min:" fieldId="tlsVersionMin">
+          <TextInput
+            type="text"
+            id="tlsVersionMin"
+            name="tlsVersionMin"
+            value={tlsVersionMin}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
       </div>
       <div>
-        <label htmlFor="tlsAuth">Use TLS Auth:</label>
-        <input
-          type="checkbox"
-          id="tlsAuth"
-          name="tlsAuth"
-          checked={tlsAuth}
-          onChange={handleInputChange}
-        />
+        <FormGroup label="Cipher:" fieldId="cipher">
+          <TextInput
+            type="text"
+            id="cipher"
+            name="cipher"
+            value={cipher}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
       </div>
       <div>
-        <label htmlFor="tlsCrypt">Use TLS Crypt:</label>
-        <input
-          type="checkbox"
-          id="tlsCrypt"
-          name="tlsCrypt"
-          checked={tlsCrypt}
-          onChange={handleInputChange}
-        />
+        <FormGroup label="HMAC:" fieldId="hmac">
+          <TextInput
+            type="text"
+            id="hmac"
+            name="hmac"
+            value={hmac}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
       </div>
       <div>
-        <label htmlFor="tlsVersionMin">TLS Version Min:</label>
-        <input
-          type="text"
-          id="tlsVersionMin"
-          name="tlsVersionMin"
-          value={tlsVersionMin}
-          onChange={handleInputChange}
-        />
+        <FormGroup label="Auth:" fieldId="auth">
+          <TextInput
+            type="text"
+            id="auth"
+            name="auth"
+            value={auth}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
       </div>
       <div>
-        <label htmlFor="cipher">Cipher:</label>
-        <input
-          type="text"
-          id="cipher"
-          name="cipher"
-          value={cipher}
-          onChange={handleInputChange}
-        />
+        <FormGroup label="RSA:" fieldId="rsa">
+          <TextInput
+            type="number"
+            id="rsa"
+            name="rsa"
+            value={rsa}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
       </div>
       <div>
-        <label htmlFor="hmac">HMAC:</label>
-        <input
-          type="text"
-          id="hmac"
-          name="hmac"
-          value={hmac}
-          onChange={handleInputChange}
-        />
+        <FormGroup label="DH:" fieldId="dh">
+          <TextInput
+            type="number"
+            id="dh"
+            name="dh"
+            value={dh}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
       </div>
       <div>
-        <label htmlFor="auth">Auth:</label>
-        <input
-          type="text"
-          id="auth"
-          name="auth"
-          value={auth}
-          onChange={handleInputChange}
-        />
+        <FormGroup label="NCP Ciphers:" fieldId="ncpCiphers">
+          <TextInput
+            type="text"
+            id="ncpCiphers"
+            name="ncpCiphers"
+            value={ncpCiphers}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
       </div>
-      <div>
-        <label htmlFor="rsa">RSA:</label>
-        <input
-          type="number"
-          id="rsa"
-          name="rsa"
-          value={rsa}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="dh">DH:</label>
-        <input
-          type="number"
-          id="dh"
-          name="dh"
-          value={dh}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="ncpCiphers">NCP Ciphers:</label>
-        <input
-          type="text"
-          id="ncpCiphers"
-          name="ncpCiphers"
-          value={ncpCiphers}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="ncpEnabled">NCP Enabled:</label>
-        <input
-          type="checkbox"
+      <FormGroup label="" fieldId="ncpEnabled">
+        <Checkbox
           id="ncpEnabled"
-          name="ncpEnabled"
-          checked={ncpEnabled}
-          onChange={handleInputChange}
+          isChecked={ncpEnabled}
+          onChange={event => setNcpEnabled(event.target.checked)}
+          label="NCP Enabled"
         />
-      </div>
+      </FormGroup>
       <div>
-        <label htmlFor="tlsCipher">TLS Cipher:</label>
-        <input
-          type="text"
-          id="tlsCipher"
-          name="tlsCipher"
-          value={tlsCipher}
-          onChange={handleInputChange}
-        />
+        <FormGroup label="TLS Cipher:" fieldId="tlsCipher">
+          <TextInput
+            type="text"
+            id="tlsCipher"
+            name="tlsCipher"
+            value={tlsCipher}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
       </div>
-      <div>
-        <label htmlFor="tlsCryptV2">Use TLS Crypt V2:</label>
-        <input
-          type="checkbox"
+      <FormGroup label="" fieldId="tlsCryptV2">
+        <Checkbox
           id="tlsCryptV2"
-          name="tlsCryptV2"
-          checked={tlsCryptV2}
-          onChange={handleInputChange}
+          isChecked={tlsCryptV2}
+          onChange={event => setTlsCryptV2(event.target.checked)}
+          label="Use TLS Crypt V2"
         />
-      </div>
-      <button onClick={handleSave}>Save Configuration</button>
+      </FormGroup>
+      <Button onClick={handleSave} variant="primary">
+        Save Configuration
+      </Button>
     </div>
-  );
+  </div>
+</div>
+);
 }
 
 export default OpenVpnForm;

@@ -1,10 +1,11 @@
-ç.segmented-control {
+.segmented-control {
   display: flex;
   align-items: center;
   height: 50px;
-  border-radius: 5px;
+  border-radius: 25px; /* Utilisation d'un border-radius plus grand pour un aspect arrondi */
   overflow: hidden;
   background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ajout d'une légère ombre */
 }
 
 .segment {
@@ -24,7 +25,6 @@
 }
 
 .segment.selected {
-  background-color: #4caf50;
-  color: #fff;
+  background-color: #007bff; /* Changement de couleur de fond pour la segment sélectionné en bleu */
+  color: #fff; /* Changement de couleur du texte en blanc */
 }
-

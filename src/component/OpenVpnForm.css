@@ -1,6 +1,12 @@
 .openvpn-form {
   width: 50%;
   margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #007bff; /* Changement de couleur de la bordure en bleu */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9; /* Changement de couleur de fond en gris clair */
+  color: #333; /* Changement de couleur du texte en noir */
 }
 
 .openvpn-form-group {
@@ -16,11 +22,13 @@
 .openvpn-form-group input[type='text'],
 .openvpn-form-group input[type='number'],
 .openvpn-form-group textarea {
-  width: 100%;
-  padding: 5px;
+  width: calc(100% - 12px); /* Ajustement de la largeur pour tenir compte de la bordure */
+  padding: 2px; /* Réduction de l'espacement */
   border: 1px solid #ccc;
   border-radius: 3px;
+  font-size: 14px; /* Réduction de la taille de la police */
 }
+
 
 .openvpn-form-group input[type='checkbox'] {
   margin-top: 5px;
@@ -32,7 +40,7 @@
 
 .openvpn-form-group button {
   width: 100%;
-  padding: 5px;
+  padding: 8px;
   background-color: #007bff;
   color: #fff;
   border: none;

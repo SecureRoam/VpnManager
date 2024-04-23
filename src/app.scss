@@ -15,7 +15,8 @@ body {
 
 .layout-header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
   background-color: #f5f5f5;
 }
@@ -31,10 +32,19 @@ body {
 }
 
 .layout-body-left {
-  flex: 1;
-  margin-right: 20px;
+  flex: 0 0 50%; /* Réduire la taille de la colonne à 50% */
+  margin-right: 10px;
+  background-color: #fcead1;
+}
+
+
+.layout-body-middle {
+  flex: 2;
+  margin: 0 10px;
+  background-color: #b5e2ff;
 }
 
 .layout-body-right {
   flex: 1;
+  background-color: #007bff;
 }
