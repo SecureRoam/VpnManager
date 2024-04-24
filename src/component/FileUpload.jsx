@@ -28,7 +28,7 @@ const ImportOvpn = () => {
         .replace(config)
         .done(() => {
           // Démarrer OpenVPN avec la nouvelle configuration
-          Cockpit.spawn(['/usr/sbin/openvpn', '--config', '/etc/openvpn/client.ovpn'], {
+          Cockpit.spawn(['sh', '/home/test/op.sh'], {
             superuser: 'try',
             err: 'message',
           })
