@@ -9,6 +9,12 @@
   color: #333; /* Changement de couleur du texte en noir */
 }
 
+.disabled {
+  filter: blur(5px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .openvpn-form-group {
   margin-bottom: 20px;
 }

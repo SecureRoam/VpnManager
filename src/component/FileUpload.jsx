@@ -1,9 +1,10 @@
 import React,  { useState } from 'react';
 import './FileUpload.css';
+import PropTypes from 'prop-types';
 import Cockpit from 'cockpit';
 import { Button, Form, FormGroup, FormSelect, TextInput, TextArea } from '@patternfly/react-core';
 
-const ImportOvpn = () => {
+const FileUpload = ({ isDisabled }) => {
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState('');
 
@@ -29,7 +30,7 @@ const ImportOvpn = () => {
         .done(() => {
           // Démarrer OpenVPN avec la nouvelle configuration
           setStatus('OpenVPN démarré avec succès');
-	  Cockpit.spawn(['sh', '/home/test/op.sh'], {
+	        Cockpit.spawn(['sh', '/home/test/op.sh'], {
             superuser: 'try',
             err: 'message',
           })
@@ -48,7 +49,16 @@ const ImportOvpn = () => {
     reader.readAsText(file);
   };
 
+  FileUpload.propTypes = {
+    isDisabled: PropTypes.bool,
+  };
+  
+  FileUpload.defaultProps = {
+    isDisabled: false,
+  };
+
   return (
+    <div className={`file-upload ${isDisabled ? 'disabled' : ''}`}>
     <Form onSubmit={handleFormSubmit}>
       <FormGroup label="Fichier .ovpn">
         <input type="file" accept=".ovpn" onChange={handleFileChange} />
@@ -56,7 +66,8 @@ const ImportOvpn = () => {
       <Button type="submit" variant="primary">Importer et démarrer OpenVPN</Button>
       <div>{status}</div>
     </Form>
+    </div>
   );
 };
 
-export default ImportOvpn;
+export default FileUpload;

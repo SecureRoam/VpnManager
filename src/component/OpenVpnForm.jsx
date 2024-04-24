@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Checkbox,
   FormGroup,
@@ -9,7 +10,7 @@ import {
 import './OpenVpnForm.css';
 import Cockpit from 'cockpit';
 
-function OpenVpnForm() {
+function OpenVpnForm({ isDisabled }) {
   // Add state variables for form inputs
   const [clientConfig, setClientConfig] = useState('');
   const [remoteConfig, setRemoteConfig] = useState('');
@@ -158,9 +159,17 @@ function OpenVpnForm() {
       });
   };
 
+  OpenVpnForm.propTypes = {
+    isDisabled: PropTypes.bool,
+  };
+  
+  OpenVpnForm.defaultProps = {
+    isDisabled: false,
+  };
+
 
   return (
-    <div className="openvpn-form">
+    <div className={`openvpn-form ${isDisabled ? 'disabled' : ''}`}>
       <div>
     <h2>OpenVPN Configuration</h2>
     <div className="openvpn-form-group">

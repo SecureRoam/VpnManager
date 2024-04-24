@@ -7,3 +7,9 @@
   text-align: center; /* Centrage du contenu */
   color: #007bff; /* Changement de couleur du texte en bleu */
 }
+
+.disabled {
+  filter: blur(5px);
+  opacity: 0.5;
+  pointer-events: none;
+}
