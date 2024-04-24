@@ -31,7 +31,7 @@
 
 
 .openvpn-form-group input[type='checkbox'] {
-  margin-top: 5px;
+  margin-top: 1px;
 }
 
 .openvpn-form-group input[type='file'] {

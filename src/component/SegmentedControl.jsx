@@ -24,12 +24,6 @@ const SegmentedControl = () => {
       >
         OpenVPN
       </button>
-      <button
-        className={`segment ${selectedIndex === 2 ? 'selected' : ''}`}
-        onClick={() => handleSegmentClick(2)}
-      >
-        Tor
-      </button>
     </div>
   );
 };

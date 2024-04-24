@@ -170,8 +170,6 @@ function OpenVpnForm() {
           name="clientConfig"
           value={clientConfig}
           onChange={handleInputChange}
-          rows={10}
-          cols={50}
         />
       </FormGroup>
       <FormGroup label="Remote Configuration:" fieldId="remoteConfig">
@@ -180,8 +178,6 @@ function OpenVpnForm() {
           name="remoteConfig"
           value={remoteConfig}
           onChange={handleInputChange}
-          rows={10}
-          cols={50}
         />
       </FormGroup>
       <FormGroup label="" fieldId="authUserPass">
@@ -220,8 +216,6 @@ function OpenVpnForm() {
           name="caFile"
           value={caFile}
           onChange={handleInputChange}
-          rows={10}
-          cols={50}
         />
       </FormGroup>
       <div>
@@ -231,8 +225,6 @@ function OpenVpnForm() {
             name="certFile"
             value={certFile}
             onChange={handleInputChange}
-            rows={10}
-            cols={50}
           />
         </FormGroup>
       </div>
@@ -243,8 +235,6 @@ function OpenVpnForm() {
             name="keyFile"
             value={keyFile}
             onChange={handleInputChange}
-            rows={10}
-            cols={50}
           />
         </FormGroup>
       </div>
