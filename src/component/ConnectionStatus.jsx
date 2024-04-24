@@ -12,7 +12,11 @@ function ConnectionStatus() {
     cockpit.file('/etc/hostname').watch(content => {
       setHostname(content.trim());
     });
+    const interval = setInterval(() => {
+	fetchIpInfo();
+    }, 10000);
     fetchIpInfo();
+    return () => clearInterval(interval);
   }, []);
 
 const fetchIpInfo = async () => {

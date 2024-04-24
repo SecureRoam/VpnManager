@@ -5,7 +5,7 @@
 
     "tools": {
         "index": {
-            "label": "VPN_Manager"
+            "label": "VpnManager"
         }
     }
 }
