@@ -9,11 +9,11 @@ const ToggleSwitch = ({ isOpenVpnEnabled, onToggle }) => {
 
   return (
     <div className="toggle-switch">
-      <label>
-        <input type="checkbox" checked={isOpenVpnEnabled} onChange={handleToggle} />
-        <span className="slider"></span>
-      </label>
-    </div>
+    <label>
+      <input type="checkbox" checked={isOpenVpnEnabled} onChange={handleToggle} />
+      <span className="slider"></span>
+    </label>
+  </div>
   );
 };
 

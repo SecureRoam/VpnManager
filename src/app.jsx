@@ -19,11 +19,7 @@ export const Application = () => {
   return (
     <div className="App">
       <Layout>
-        <ToggleSwitch
-          isEnabled={isOpenVpnEnabled}
-          onToggle={handleOpenVpnToggle}
-          label="OpenVPN"
-        />
+      <ToggleSwitch isOpenVpnEnabled={isOpenVpnEnabled} onToggle={handleOpenVpnToggle} />
         <ConnectionStatus />
         <FileUpload isDisabled={!isOpenVpnEnabled} />
         <OpenVpnForm isDisabled={!isOpenVpnEnabled} />
